@@ -1,0 +1,73 @@
+﻿@page
+@model M05_UF3_P2_Template.Pages.Companies.CompanyModel
+
+@{
+    if (Model.Id > 0)
+    {
+        ViewData["Title"] = "Company - " + Model.company.Name;
+    }
+    else
+    {
+        ViewData["Title"] = "Company - Create";
+    }
+}
+
+<form method="post">
+    <div class="card">
+        <div class="card-header">
+            <h1 class="card-title">
+                @if (Model.Id > 0)
+                {
+                    <img class="img img-thumbnail img-fluid" src="@Model.company.Icon" style="width: 200px; height: 100px; object-fit: scale-down; background-color:@Model.company.IconBackground;" />
+                    <span>@Model.company.Name - <small>Edit Company</small></span>
+                }
+                else
+                {
+                    <span>Create company</span>
+                }
+                <button type="submit" class="btn btn-primary float-right"><span class="material-icons">save</span></button>
+            </h1>
+        </div>
+        <div class="card-body">
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <label for="Company_Id_Input col-sm-2 col-form-label"><span class="material-icons mx-1" style="font-size: 1rem;">tag</span>Id</label>
+                    @{
+                        string CustomId = Model.Id > 0 ? Model.Id.ToString() : null;
+                    }
+                    <input type="text" asp-for="company.Id" value="@CustomId" readonly class="form-control" id="Company_Id_Input" placeholder="-">
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="Company_Name_Input col-sm-2 col-form-label"><span class="material-icons mx-1" style="font-size: 1rem;">business</span>Name</label>
+                    <input type="text" asp-for="company.Name" maxlength="50" class="form-control" id="Company_Name_Input" placeholder="Name">
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="Company_CIF_Input col-sm-2 col-form-label"><span class="material-icons mx-1" style="font-size: 1rem;">badge</span>CIF</label>
+                    <input type="text" asp-for="company.CIF" maxlength="50" class="form-control" id="Company_CIF_Input" placeholder="YXXXXXXXXX">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Company_Address_Input col-sm-2 col-form-label"><span class="material-icons mx-1" style="font-size: 1rem;">home</span>Address</label>
+                <input type="text" asp-for="company.Address" maxlength="2048" class="form-control" id="Company_Address_Input" placeholder="1234 Main St. City State, 00000">
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md">
+                    <label for="Company_Web_Input col-sm-2 col-form-label"><span class="material-icons mx-1" style="font-size: 1rem;">language</span>Web</label>
+                    <input type="url" asp-for="company.Web" class="form-control" id="Company_Web_Input" placeholder="Web">
+                </div>
+                <div class="form-group col-md">
+                    <label for="Company_Email_Input col-sm-2 col-form-label"><span class="material-icons mx-1" style="font-size: 1rem;">email</span>Email</label>
+                    <input type="email" asp-for="company.Email" class="form-control" id="Company_Email_Input" placeholder="name@domain.com">
+                </div>
+                <div class="form-group col-md">
+                    <label for="Company_Icon_Input col-sm-2 col-form-label"><span class="material-icons mx-1" style="font-size: 1rem;">image</span>Icon</label>
+                    <input type="url" asp-for="company.Icon" class="form-control" id="Company_Icon_Input" placeholder="domain.com/image.png">
+                </div>
+                <div class="form-group col-md-1">
+                    <label for="Company_IconColor_Input col-sm-2 col-form-label"><span class="material-icons mx-1" style="font-size: 1rem;">palette</span>Icon Background</label>
+                    <input type="color" asp-for="company.IconBackground" class="form-control" id="Company_IconColor_Input" placeholder="FFFFFF">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
